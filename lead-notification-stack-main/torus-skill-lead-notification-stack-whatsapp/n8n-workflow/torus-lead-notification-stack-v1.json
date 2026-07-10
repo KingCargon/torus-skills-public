@@ -1,0 +1,164 @@
+{
+  "name": "Torus Lead Notification Stack",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "torus-lead-notification",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8f10f005-10d0-483a-897a-21a842f07772",
+      "name": "Webhook",
+      "webhookId": "51dcbd6c-5a94-4f82-9646-497777f32796"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b2822194-40f8-4fc1-b56c-cb803bddfdce",
+              "leftValue": "={{ $json.headers[\"x-torus-webhook-secret\"] }}",
+              "rightValue": "YOUR_WEBHOOK_SECRET",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "40a43081-0253-4a26-a453-0fd086cd7d93",
+      "name": "check torus secret"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5fd9ef95-b5d8-49d7-b59a-cc8aeecf0978",
+              "name": "whatsapp_message",
+              "value": "={{ $json.body.whatsappMessage || (\"🔔 New Torus Lead\\n\\nSource: \" + ($json.body.lead.source || \"—\") + \"\\nName: \" + ($json.body.lead.name || \"—\") + \"\\nEmail: \" + ($json.body.lead.email || \"—\") + \"\\nPhone: \" + ($json.body.lead.phone || \"—\") + \"\\n\\nMessage:\\n\" + ($json.body.lead.message || \"—\") + \"\\n\\nSubmitted: \" + ($json.body.lead.submittedAt || \"—\") + \"\\n\\nAdmin:\\nYOUR_ADMIN_DASHBOARD_URL\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -96
+      ],
+      "id": "0b9f0dbb-0b1d-48ea-a6bc-e7d9af1feb93",
+      "name": "Format Lead Message"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v20.0/YOUR_WHATSAPP_PHONE_NUMBER_ID/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_META_WHATSAPP_ACCESS_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "=json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={{ JSON.stringify({\n  messaging_product: \"whatsapp\",\n  to: \"YOUR_RECIPIENT_PHONE_NUMBER\",\n  type: \"text\",\n  text: {\n    preview_url: false,\n    body: $json.whatsapp_message\n  }\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        624,
+        -96
+      ],
+      "id": "5f0b3a5f-07b8-417c-89b5-1214b63066c7",
+      "name": "Send WhatsApp Alert"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "check torus secret",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check torus secret": {
+      "main": [
+        [
+          {
+            "node": "Format Lead Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Lead Message": {
+      "main": [
+        [
+          {
+            "node": "Send WhatsApp Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "326d7847-6960-4bbb-b65d-f0c9b162c7b0",
+  "meta": {
+    "instanceId": "3dbda0d9251d738de2c8ea3c6effc5105ab8100f033a0a6a6597e9f3828076af"
+  },
+  "nodeGroups": [],
+  "id": "1ZbsBZI3UCrAekwo",
+  "tags": []
+}

@@ -1,0 +1,71 @@
+# Torus canonical project record — Torus Lead Notification Stack.
+#
+# Adopted 2026-08-30 under the Founder Code MultiBuild Operating System §17.
+#
+# NOTE ON SCOPE. This repository is named as a library ("Torus Skills
+# Library") and currently publishes exactly one skill, which Torus Factory
+# already lists. The record therefore carries that skill's existing,
+# published Factory identity rather than inventing a new one. If a second
+# skill is ever published from here, one record can no longer describe the
+# repository honestly and the skills need separating — flagged in the
+# migration PR.
+#
+# PUBLIC-SAFE IN ITS ENTIRETY. This repository is already public.
+schema_version: "2"
+asset:
+  # Existing, already-published Factory identity. NOT newly assigned.
+  id: torus.lead-notification-stack
+  name: Torus Lead Notification Stack — WhatsApp
+  brand: Torus
+  product_family: torus
+
+  type: skill
+  status: public
+  visibility: public
+  version: "1.1.0"
+
+  north_star: >
+    A lead never goes unnoticed — capture it wherever it lands, store it,
+    and put it in front of a human within seconds, on infrastructure any
+    company can run themselves.
+
+  repository:
+    name: torus-skills-public
+    default_branch: main
+
+  factory:
+    # A Factory record for this product ALREADY EXISTS, at visibility
+    # "unlisted" — a real, directly linkable page kept out of default
+    # browsing. So a first publication genuinely happened, and the slug
+    # below is the one already in use. It must not change.
+    listing_state: listed-unlisted
+    slug: torus-lead-notification-stack
+    previous_slugs: []
+    first_publication_approved: true
+    first_publication_approved_by: Kevin Cargon
+    first_publication_approved_on: "2026-07-09"
+    last_sync: "2026-07-09"
+
+  public_metadata:
+    category: automations
+    type_label: Automation Stack
+    tagline: Every lead reaches a human within seconds.
+    description: >
+      Captures leads from a site or app, stores them, and notifies the team
+      by email and WhatsApp through a genericized n8n workflow. Originally
+      proven on pricing.torusai.io.
+    manufacturing_stage: continuous-improvement
+    access_model: open-source
+    last_release: "2026-07-09"
+    # license is OMITTED because there is genuinely none: this repository
+    # has no LICENSE file and GitHub reports no licence, while the source is
+    # public and the access model is open-source. That combination is
+    # exactly why Torus Factory keeps this product `unlisted` today. The
+    # publication gate reaches the same conclusion independently.
+    links:
+      github: https://github.com/KingCargon/torus-skills-public
+      docs:
+      demo:
+      product:
+      early_access:
+      pricing:

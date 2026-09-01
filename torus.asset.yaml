@@ -57,11 +57,15 @@ asset:
     manufacturing_stage: continuous-improvement
     access_model: open-source
     last_release: "2026-07-09"
-    # license is OMITTED because there is genuinely none: this repository
-    # has no LICENSE file and GitHub reports no licence, while the source is
-    # public and the access model is open-source. That combination is
-    # exactly why Torus Factory keeps this product `unlisted` today. The
-    # publication gate reaches the same conclusion independently.
+    # MIT, added 2026-09-01 after a licensing inspection found nothing that
+    # constrains the choice: no dependency manifests, no lockfiles, no
+    # vendored or third-party code, no third-party copyright notices, and an
+    # n8n workflow built only from stock `n8n-nodes-base` nodes with no
+    # embedded credentials. `.env.example` carries placeholders only.
+    #
+    # This is the field that kept the product unlisted. The gate now decides
+    # on its own whether that changes — nothing here forces a listing.
+    license: MIT
     links:
       github: https://github.com/KingCargon/torus-skills-public
       docs:

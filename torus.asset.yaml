@@ -56,6 +56,15 @@ asset:
       proven on pricing.torusai.io.
     manufacturing_stage: continuous-improvement
     access_model: open-source
+    # Replaces the live page's note, which said the product stayed unlisted
+    # because "license terms are not yet confirmed". They are confirmed now.
+    # Left stale, that note would contradict the page it sits on.
+    note: >
+      MIT licensed and public. A lead-capture endpoint, a Supabase store, and
+      a genericized n8n workflow that notifies the team by email and WhatsApp
+      — copy the API template into a project, set the environment variables,
+      and import the workflow. No dependencies to vendor and nothing
+      Torus-specific left in it.
     last_release: "2026-07-09"
     # MIT, added 2026-09-01 after a licensing inspection found nothing that
     # constrains the choice: no dependency manifests, no lockfiles, no

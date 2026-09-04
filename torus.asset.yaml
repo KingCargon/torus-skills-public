@@ -38,13 +38,17 @@ asset:
     # "unlisted" — a real, directly linkable page kept out of default
     # browsing. So a first publication genuinely happened, and the slug
     # below is the one already in use. It must not change.
-    listing_state: listed-unlisted
+    # listed-public since the MIT licence resolved the one blocker that kept
+    # this product unlisted. The gate promoted it on its own; the record was
+    # still describing the state before that, and the gate reads this value
+    # to know whether a product was already listed.
+    listing_state: listed-public
     slug: torus-lead-notification-stack
     previous_slugs: []
     first_publication_approved: true
     first_publication_approved_by: Kevin Cargon
     first_publication_approved_on: "2026-07-09"
-    last_sync: "2026-07-09"
+    last_sync: "2026-09-04"
 
   public_metadata:
     category: automations
